@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import url from "../assets/login-img.jpg";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "../assets/logo.svg";
 import "./Login.css";
 
@@ -68,6 +68,9 @@ function Register() {
               </div>
               <button className="btn">Register</button>
             </form>
+            <div>
+              Already have an Account? <Link to="/login">Login</Link>
+            </div>
           </div>
         </div>
       </div>

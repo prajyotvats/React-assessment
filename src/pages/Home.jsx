@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Table,
   Thead,
@@ -28,6 +29,7 @@ const Home = () => {
   const [data, setdata] = useState([]);
   const [page, setpage] = useState(1);
   const [skip, setskip] = useState(10);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const url = `https://dummyjson.com/users?skip=${skip}&limit=5`;
@@ -47,6 +49,10 @@ const Home = () => {
 
     setskip(() => 10 * page);
   };
+  const handleLogout = () => {
+    localStorage.removeItem("loggedin");
+    navigate("/login");
+  };
   console.log(page);
 
   console.log("data", data);
@@ -60,7 +66,7 @@ const Home = () => {
           </Box>
           <Spacer />
           <Box p="4" color="purple.300">
-            <Button>+ Add User</Button>
+            <Button onClick={handleLogout}>Log Out</Button>
           </Box>
         </Flex>
         <br />
@@ -114,6 +120,7 @@ const Home = () => {
           </Table>
         </TableContainer>
       </Box>
+      <br />
       <Box>
         <Button onClick={handleDecrement} disabled={page === 1}>
           Prev

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import url from "../assets/login-img.jpg";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "../assets/logo.svg";
 import "./Login.css";
 
@@ -28,6 +28,7 @@ function Login() {
     });
     if (user.length != 0) {
       alert("login successful");
+      localStorage.setItem("loggedin", true);
       navigate("/");
     } else {
       alert("Invalid credentials");
@@ -55,7 +56,6 @@ function Login() {
                   type="text"
                   name="email"
                   value={input.email}
-                  placeholder="Enter Username"
                   onChange={handleChange}
                 />
               </div>
@@ -65,12 +65,14 @@ function Login() {
                   type="password"
                   name="password"
                   value={input.password}
-                  placeholder="Enter Password"
                   onChange={handleChange}
                 />
               </div>
               <input type="submit" value="Login" className="btn" />
             </form>
+            <div>
+              Don't have Account,<Link to="/register"> Register!</Link>
+            </div>
           </div>
         </div>
       </div>
