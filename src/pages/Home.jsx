@@ -126,7 +126,7 @@ const Home = () => {
         </TableContainer>
         <Flex justifyContent={"space-between"}>
           <Text color={"gray.400"}>
-            Showing 1-{data.length} of {data.length}{" "}
+            Showing 1-{data.length} of {data.length}
           </Text>
           <Button onClick={handleLogout}>Logout</Button>
         </Flex>
