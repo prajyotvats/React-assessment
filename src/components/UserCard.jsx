@@ -21,7 +21,7 @@ import { CgProfile } from "react-icons/cg";
 import { GoGraph } from "react-icons/go";
 
 const UserCard = ({ data }) => {
-  console.log("data", data);
+  // console.log("data", data);
   const [size, setSize] = React.useState("");
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -32,14 +32,26 @@ const UserCard = ({ data }) => {
 
   return (
     <Box>
-      <Button onClick={() => handleClick("sm")} key={"sm"} m={4}>
-        <FiMoreVertical />
-      </Button>
+      <Text
+        onClick={() => handleClick("sm")}
+        key={"sm"}
+        m={4}
+        cursor={"pointer"}
+      >
+        <span>
+          {data.firstName} {data.lastName}
+        </span>
+      </Text>
 
       <Drawer onClose={onClose} isOpen={isOpen} size={size}>
         <DrawerOverlay />
-        <DrawerContent>
-          <DrawerCloseButton />
+        <DrawerContent
+          borderTopLeftRadius={"15px"}
+          borderBottomLeftRadius={"15px"}
+        >
+          <DrawerCloseButton fontSize={"20px"}>
+            <FiMoreVertical />
+          </DrawerCloseButton>
           <DrawerHeader>User Details</DrawerHeader>
           <DrawerBody>
             <Box>
@@ -91,7 +103,10 @@ const UserCard = ({ data }) => {
             <br />
             <Box>
               <Flex gap={"35px"} alignItems="center">
-                <Heading size={"lg"}>
+                <Heading
+                  size={"lg"}
+                  // bgColor={"lightgray"} borderRadius={"50%"}
+                >
                   <GoGraph />
                 </Heading>
                 <Heading size={"xm"}>User data</Heading>

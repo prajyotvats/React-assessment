@@ -51,13 +51,14 @@ function Login() {
             </div>
             <form onSubmit={handleSubmit}>
               <div className="input-block">
-                <label>Email</label>
+                <label>Email ID</label>
                 <input
                   type="text"
                   name="email"
                   value={input.email}
                   onChange={handleChange}
                 />
+                {/* <br /> */}
               </div>
               <div className="input-block">
                 <label>Password</label>
@@ -70,8 +71,9 @@ function Login() {
               </div>
               <input type="submit" value="Login" className="btn" />
             </form>
-            <div>
-              Don't have Account,<Link to="/register"> Register!</Link>
+            <div className="forgotPass">
+              {/* <Link to="/register"> Forgot Password?</Link> */}
+              Forgot Password?
             </div>
           </div>
         </div>

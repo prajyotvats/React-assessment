@@ -35,6 +35,12 @@
   justify-content: center;
   align-items: center; */
 }
+.forgotPass {
+  display: flex;
+  flex-direction: row-reverse;
+  margin-top: 5px;
+  color: #972497;
+}
 .logo-ship {
   max-height: 150px;
   margin: 0 auto;
@@ -53,10 +59,12 @@
 .header h1 {
   margin-bottom: 7px;
   font-size: 35px;
+  font-weight: 700;
 }
 
 .header h4 {
   font-size: 17px;
+  font-weight: 400;
 }
 
 form {
@@ -66,14 +74,29 @@ form {
 }
 
 .input-block {
+  position: relative;
   display: flex;
   flex-direction: column;
   margin-bottom: 12px;
   font-size: 20px;
   font-weight: 400;
+  margin-top: 25px;
+  line-height: 35px;
+}
+
+label {
+  font-size: initial;
+  color: #972497;
+  height: 28px;
+  border-radius: 3px;
 }
 .input-block label {
-  font-size: 15 px;
+  position: absolute;
+  top: -17px;
+  left: 10px;
+  z-index: 2;
+  background: white;
+  /* font-size: 15 px; */
 }
 .input-block input {
   /* outline: none; */
@@ -83,10 +106,15 @@ form {
   border: 2px solid #dfdfdf;
   border-radius: 6px;
 }
+/* .input:focus{
+  position: absolute;
+} */
 .btn {
   font-size: 20px;
   border: 2px solid #dfdfdf;
   border-radius: 6px;
   color: white;
-  background: -webkit-linear-gradient(left, #7579ff, #b224ef);
+  /* background: -webkit-linear-gradient(left, #7579ff, #b224ef); */
+  background: rgb(78, 44, 144);
+  margin-top: 25px;
 }

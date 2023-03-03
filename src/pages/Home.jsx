@@ -18,44 +18,31 @@ import {
   InputGroup,
   InputLeftElement,
   Input,
+  Image,
 } from "@chakra-ui/react";
 import "../components/Home.css";
 import axios from "axios";
 import UserCard from "../components/UserCard";
 import { BiSearchAlt2 } from "react-icons/bi";
 import { AiOutlineFilter } from "react-icons/ai";
+import { FiMoreVertical } from "react-icons/fi";
 
 const Home = () => {
   const [data, setdata] = useState([]);
-  const [page, setpage] = useState(1);
-  const [skip, setskip] = useState(10);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const url = `https://dummyjson.com/users?skip=${skip}&limit=5`;
+    const url = `https://dummyjson.com/users?skip=0&limit=5`;
     axios.get(url).then(({ data }) => {
       setdata(data.users);
     });
-  }, [skip]);
+  }, []);
 
-  const handleIncrement = () => {
-    setpage((page) => page + 1);
-    setskip(() => 5 * page);
-  };
-  const handleDecrement = () => {
-    if (page > 1) {
-      setpage((page) => page - 1);
-    }
-
-    setskip(() => 10 * page);
-  };
-  const handleLogout = () => {
-    localStorage.removeItem("loggedin");
+  function handleLogout() {
+    localStorage.removeItem("loggedin", true);
     navigate("/login");
-  };
-  console.log(page);
+  }
 
-  console.log("data", data);
   return (
     <>
       <Box className="container">
@@ -66,7 +53,7 @@ const Home = () => {
           </Box>
           <Spacer />
           <Box p="4" color="purple.300">
-            <Button onClick={handleLogout}>Log Out</Button>
+            <Button>+ Add User</Button>
           </Box>
         </Flex>
         <br />
@@ -92,42 +79,59 @@ const Home = () => {
         <TableContainer>
           <Table>
             <Thead m={"auto"}>
-              <Tr>
+              <Tr className="tr-main" borderRadius={"12px"}>
                 <Th>Name</Th>
                 <Th>Email</Th>
                 <Th>Gender</Th>
-                <Th>More</Th>
+                <Th></Th>
               </Tr>
+              <br />
             </Thead>
             <Tbody>
-              {data.length &&
+              {data.length > 0 ? (
                 data.map((el) => (
-                  <Tr key={el.id} className="tr">
-                    <Td className="td1">
-                      <img src={el.image} alt="image" width={"50px"} />
-                      <span>
+                  <>
+                    <Tr key={el.id} className="tr">
+                      <Td className="td1">
+                        <Image
+                          src={el.image}
+                          alt="image"
+                          width={"50px"}
+                          borderRadius={"50%"}
+                          border={"2px solid gray"}
+                        />
+                        {/* <span>
                         {el.firstName} {el.lastName}
-                      </span>
-                    </Td>
-                    <Td>{el.email}</Td>
-                    <Td>{el.gender}</Td>
-                    <Td>
-                      <UserCard data={el} />
-                    </Td>
-                  </Tr>
-                ))}
+                      </span> */}
+                        <UserCard data={el} />
+                      </Td>
+                      <Td>{el.email}</Td>
+                      <Td>{el.gender}</Td>
+                      <Td>
+                        {/* <UserCard data={el} /> */}
+                        <FiMoreVertical />
+                      </Td>
+                    </Tr>
+                    <br />
+                  </>
+                ))
+              ) : (
+                <>
+                  Data not Found
+                  <br />
+                </>
+              )}
             </Tbody>
           </Table>
         </TableContainer>
+        <Flex justifyContent={"space-between"}>
+          <Text color={"gray.400"}>
+            Showing 1-{data.length} of {data.length}{" "}
+          </Text>
+          <Button onClick={handleLogout}>Logout</Button>
+        </Flex>
       </Box>
       <br />
-      <Box>
-        <Button onClick={handleDecrement} disabled={page === 1}>
-          Prev
-        </Button>
-        <span>{page}</span>
-        <Button onClick={handleIncrement}>Next</Button>
-      </Box>
     </>
   );
 };
